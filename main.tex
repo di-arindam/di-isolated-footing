@@ -1,0 +1,573 @@
+l%----------------------------------------------------------------------------------------
+%   PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\documentclass[10pt,a4paper]{article}
+\usepackage{geometry}
+\geometry{
+    a4paper,
+    left=10mm,
+    right=10mm,
+    headsep=1mm,
+%     % tmargin=0pt,
+    top=19mm,
+    headheight=33pt,
+    bottom=25mm
+%     % voffset=0pt,
+%     % footskip=20pt,
+% includeheadfoot
+}
+% \addtolength{\topmargin}{2cm}
+% \PassOptionsToPackage
+% \geometry{article, margin=1cm}
+\usepackage{marginnote} % Required for margin notes
+\usepackage{datetime}
+\usepackage{adjustbox}
+\usepackage{pgfplotstable}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.11}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{csvsimple}
+\usepackage{tcolorbox}
+\usepackage{placeins}
+\usepackage{hyperref} % makes contents with hyperrefferences
+\usepackage{wallpaper} % Required to set each page to have a background
+\usepackage{lastpage} % Required to print the total number of pages
+% \usepackage[left=1.5cm,right=1.5cm,top=2.4cm,bottom=4.0cm,marginparwidth=0cm, headsep=1.5cm]{geometry}
+\usepackage{amsmath} % Required for equation customization
+\usepackage{amssymb} % Required to include mathematical symbols
+\usepackage{tabularx}%
+\usepackage{xcolor, colortbl} % Required to specify colors by name
+\usepackage{listliketab}
+\usepackage[utf8]{inputenc}
+%\usepackage{fourier}
+\usepackage{makecell}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{sidenotes}
+\usepackage{caption}
+\usepackage{ragged2e}
+\usepackage{needspace}
+\usepackage{geometry}
+
+
+
+
+\renewcommand\theadalign{b}
+\renewcommand\theadfont{\normalsize}
+%\renewcommand{\thefootnote}{\roman{footnote}}
+
+% Set Font settings:
+\usepackage{arev} % sans-serif math font
+\usepackage{helvet} % sans-serif text font
+\renewcommand{\rmdefault}{\sfdefault}
+\usepackage[math]{blindtext}
+
+\newenvironment{leftside}
+  {\begin{flushleft}}
+  {\end{flushleft}}
+
+
+% ----------Set arial as typo ------
+% \renewcommand{\rmdefault}{phv} % Arial
+% \renewcommand{\sfdefault}{phv} % Arial
+\newcommand{\rad}{\text{rad}}
+
+% ---------define colors ------------
+% ---------define colors ------------
+\definecolor{blue}{rgb}{0, 0.68, 0.94}
+\definecolor{mygray}{gray}{0.6}
+\definecolor{ao}{rgb}{0.0, 0.0, 1.0}
+\definecolor{tbsyellow}{rgb}{0.94, 0.58, 0.039}  
+\definecolor{headerblue}{RGB}{170, 170, 170}
+\definecolor{rowgray}{gray}{0.95}
+\definecolor{staco-red}{HTML}{ee1d24}
+\definecolor{Red}{rgb}{215, 67, 21}
+\definecolor{okgreen}{RGB}{220,245,220}
+\definecolor{badred}{RGB}{245,220,220}
+% ---------------- Toggles ----------------
+\providetoggle{oneway_ok}
+\providetoggle{twoway_ok}
+\providetoggle{moment_ok}
+\providetoggle{dev_ok}
+\providetoggle{bearing_ok}
+
+% Python will set these:
+% \settoggle{oneway_ok}{true}
+% \settoggle{twoway_ok}{false}
+
+
+
+%------------------subsection indent-------------
+\usepackage{changepage,lipsum,titlesec}% http://ctan.org/pkg/{changepage,lipsum,titlesec}
+\titleformat{\section}[block]{\bfseries}{\thesection.}{1em}{}
+\titleformat{\subsection}[block]{}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}[block]{}{\thesubsubsection}{1em}{}
+\titlespacing*{\subsection} {2em}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titlespacing*{\subsubsection} {3em}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+
+%------------------------------------------------
+\usepackage{fancyhdr} % Required to customize headers
+% \setlength{\headheight}{2pt} % Increase the size of the header to accommodate meta-information
+% \setlength{\footerheight}{2pt}
+\pagestyle{fancy}\fancyhf{} % Use the custom header specified below
+\renewcommand{\headrulewidth}{0pt} % Remove the default horizontal rule under the header
+
+\setlength{\parindent}{0cm} % Remove paragraph indentation
+\setlength{\unitlength}{1mm} % Set the unit length to millimeters
+
+\begin{document}
+%----------------------------------------------------------------------------------------
+%   HEADER & FOOTER INFORMATION
+%----------------------------------------------------------------------------------------
+\
+\fancyhead[R]{ \includegraphics[height=1cm, width=\textwidth, keepaspectratio]{di.png}}
+
+\fancyfoot[L]{\begin{tcolorbox}[width=\textwidth,top=1pt, bottom=1pt, colframe=staco-red, colback=staco-red , arc=0.5mm]\end{tcolorbox}\begin{center} | www.designintelligence.tech | ISOLATED FOOTING DESIGN REPORT\:\:| Page \thepage
+    \end{center}}
+
+%----------------------------------------------------------------------------------------
+%   MAIN CONTENT
+%----------------------------------------------------------------------------------------
+
+    % Insert title block
+    \begin{tcolorbox}[width=\textwidth,top=1pt, bottom=1pt, colframe=staco-red, colback=staco-red, arc=0.5mm]
+        \color{white}\hspace{0.14cm}{\large \textbf{Calculation of Isolated Footing Design}\hfill C-14-2.0d}
+    \end{tcolorbox}
+
+    % Insert table with general information
+    \vspace{0.3cm}\hspace{0.5cm}
+    \begin{tabularx}{\textwidth}{@{}m{20mm} @{}m{50mm}@{}m{25mm} @{}m{50mm}}
+        \textbf{Company:} &
+        {Design Intelligence LLP}
+        & \textbf{Project:} &
+        {Isolated Footing Designer}
+        \\
+        \textbf{Author:} &
+        {Design Intelligence LLP}
+        & \textbf{Project code:} &
+        {C-14-2.0d}
+        \\
+        \textbf{Date:} &
+        {\today}
+        &&
+    \end{tabularx}
+    \vspace{0.3cm}\hspace{0.7cm}
+    \begin{tcolorbox}[width=\textwidth,top=1pt, bottom=1pt, colframe=staco-red, colback=staco-red, arc=0.5mm]
+\color{white}\hspace{0.14cm}{\large \textbf{General Information about the Project}}
+\end{tcolorbox}
+\begin{minipage}[l]{0.5\textwidth}
+\vspace{0pt}
+\centering
+\includegraphics[scale = 0.4, keepaspectratio]{footing.png}
+\end{minipage}
+\begin{minipage}[r]{0.5\textwidth}
+\vspace{5pt}
+An Isolated Footing is a type of Shallow foundation used to support a single, individual column or pillar, commonly in residential or low-rise buildings. It acts as a pad—typically square or rectangular—that spreads concentrated loads from the column onto the soil, making it a cost-effective, easy-to-construct, and widely used foundation choice when soil bearing capacity is high.
+\vspace{-\baselineskip}
+\vspace{0.3cm}\hspace{0.6cm}
+\end{minipage}
+\section*{Input Parameters:}
+ \noindent\color{lightgray!50}\rule{\linewidth}{1pt}
+    % \newline
+    % \newline
+    \color{black}
+        \hspace{0.6cm}
+        \begin{tabularx}{\textwidth}{@{}m{70mm} @{}m{40mm} @{}m{25mm} @{}m{10mm} @{}m{15mm} @{}m{20mm}}
+                                        \bfseries{Strength Properties} & \multicolumn{5}{r}{} \\
+                                        \vspace{10pt}
+                                        {Concrete Grade}:                        & {M-20}  & $f_{ck}$ &  $20$ & $N/mm^2$   \\
+                                        \vspace{10pt}
+                                        Reinforcement Grade:                            & {Fe-415} & $f_y$ & $415$ & $N/mm^2$  \\
+                                          \vspace{0.3cm}\hspace{0.6cm}
+    \end{tabularx}
+    \noindent\color{lightgray!50}
+    % \newline
+    % \newline
+    \color{black}
+        \hspace{0.6cm}
+    \begin{tabularx}{\textwidth}{@{}m{70mm} @{}m{40mm} @{}m{15mm} @{}m{10mm} @{}m{15mm} @{}m{20mm}}
+                                        \bfseries{Column Data Input} & \multicolumn{5}{r}{} \\
+                                        \vspace{10pt}
+                                        Column Width      & $a$   & = & & {$0.3$}  & m   \\
+                                        \vspace{10pt}
+                                       Column Length:       & $b$   & = & & {$0.5$}  & m   \\
+                                       \vspace{10pt}
+                                       \bfseries{Footing Data Input} & \multicolumn{5}{r}{} \\
+                                       \vspace{10pt}
+                                        Footing Width       & $X$   & = & & {$1.8$} & m   \\
+                                        \vspace{10pt}
+                                       Footing Length:       & $Y$   & = & & {$3.6$} & m   \\ 
+                                       \vspace{10pt}
+                                        Footing Depth:       & $d$   & = & & {$692$} & mm   \\ 
+                                        \vspace{10pt}
+                                       \bfseries{External Factors} & \multicolumn{5}{r}{} \\
+                                       \vspace{10pt}
+                                       Safe Bearing Capacity:       & $q_u$   & = & & {$200$} & kN/m$^2$   \\
+                                       \vspace{10pt}
+                                       External Moment:       & $m_u$   & = & & {$540$} & kN-m   \\
+                                       \vspace{10pt}
+                                       Column Load:       & $W_u$   & = & & {$1150$} & kN   \\
+                                       
+                                       
+                                        
+\end{tabularx}
+\newpage
+ \begin{tcolorbox}[width=\textwidth,top=1pt, bottom=1pt, colframe=staco-red, colback=staco-red, arc=0.5mm]
+        \color{white}\hspace{0.14cm}{\large \textbf{Deign Assumptions}}
+    \end{tcolorbox}
+    \vspace{2mm}
+\section*{Design Assumptions}
+\begin{minipage}[l]{0.5\linewidth}
+\begin{tcolorbox}[colback=rowgray,colframe=black]
+\begin{itemize}
+  \item Column is axially loaded.
+  \item Footing is rectangular in shape.
+  \item Footing rests on homogenous soil.
+  \item Self-weight of footing is assumed as 10\% of column load, i.e.$$W_f = 10\% * W_u$$.
+  \item Design is carried out as per IS 456:2000.
+\end{itemize}
+\end{tcolorbox}
+\end{minipage}
+\hspace{0.6cm}
+\vspace{-\baselineskip}
+\begin{minipage}[c]{0.47\textwidth}
+    \centering
+    \includegraphics[width=0.8\linewidth]{footing2.png}
+    \captionof{figure}{This figure is according to input values}
+    \label{fig:placeholder}
+\end{minipage}
+\vspace{3cm}
+ \begin{tcolorbox}[width=\textwidth,top=1pt, bottom=1pt, colframe=staco-red, colback=staco-red, arc=0.5mm]
+        \color{white}\hspace{0.14cm}{\large \textbf{Bearing Pressure Check according to IS 456: 2000}}
+    \end{tcolorbox}
+\begin{adjustwidth}{5mm}{0mm}
+
+\textbf{Total Load:}
+
+\[
+W = W_u + W_f
+\]
+
+\[
+W = 1150 + 115 = 1265 \ \text{kN}
+\]
+
+\textbf{hence,}
+\[
+W = 1265 \ \text{kN}
+\]
+
+\textbf{Soil Pressure:}
+\[
+p_u = \frac{W_u + W_f}{X \times Y}
+     = \frac{1265}{3.6 \times 1.8}
+     = 195.06 \ \text{kN/m}^2
+\]
+
+\textbf{Factored Soil Pressure:}
+\[
+p_{u,f} = 1.5 \, p_u
+        = 1.5 \times 195.06
+        = 292.82 \ \text{kN/m}^2
+\]
+
+\textbf{Since } $p_u \le q_u$,
+
+{\colorbox{okgreen}{SAFE}}
+
+\normalsize
+\end{adjustwidth}
+
+\hspace{0.6cm} \section*{Conclusion}
+
+\begin{adjustwidth}{5mm}{0mm}
+The footing is safe in bearing against the applied load.
+\end{adjustwidth}
+
+\clearpage
+
+\begin{tcolorbox}[width=\textwidth,top=1pt, bottom=1pt, colframe=staco-red, colback=staco-red, arc=0.5mm]
+        \color{white}{\large \textbf{One-way Shear Check according to IS 456: 2000}}
+    \end{tcolorbox}
+
+\noindent {\hspace{0.2cm}\normalsize{ \textbf{One-Way Shear Check}}}
+(IS 456:2000, Cl. 31.6.1)
+
+
+\normalsize{Critical section for one-way shear is located at a distance 
+$d$\,from the face of the column.}
+
+\vspace{2mm}
+
+\textbf{Shear force in shorter direction:}
+
+\[
+V_{u,x} = p_u \,\times Y\times
+\left(
+\frac{X}{2} - \frac{a}{2} - d
+\right)
+\]
+
+\[
+V_{u,x} = 195.06 \times 3.6
+(0.9 - 0.15 - 0.692)
+= 40.8 \ \text{kN}
+\]
+
+\textbf{Shear force in longer direction:}
+
+\[
+V_{u,y} = p_u \,\times X\times
+\left(
+\frac{Y}{2} - \frac{b}{2} - d
+\right)
+\]
+
+\[
+V_{u,y} = 195.06 \times 1.8
+(1.8 - 0.30 - 0.692)
+= 283.6 \ \text{kN}
+\]
+
+\textbf{Governing shear force:}
+
+\[
+V_u = \max(V_{u,x}, V_{u,y})
+= \max(40.8, 283.6)
+= 283.6 \ \text{kN}
+\]
+
+\textbf{Nominal shear stress:}
+
+\[
+\tau_v = \frac{V_u}{b \, d}
+= \frac{283.6}{1.8 \times 0.692}
+= 0.23 \ \text{N/mm}^2
+\]
+
+Permissible shear stress (Table 19, IS 456):
+
+\[
+\tau_c = 0.36 \ \text{N/mm}^2
+\]
+
+\textbf{Since } $\tau_v \le \tau_c$,
+
+\vspace{2mm}
+\colorbox{okgreen}{\textbf{SAFE}}
+
+\normalsize
+    \centering
+    \includegraphics[width=0.9\linewidth]{oneway.png}
+    \label{fig:placeholder}
+\begin{tcolorbox}[width=\textwidth,top=1pt, bottom=1pt, colframe=staco-red, colback=staco-red, arc=0.5mm]
+        \color{white}\hspace{0.14cm}{\large \textbf{Two-way Shear Check according to IS 456: 2000}}
+        \end{tcolorbox}
+
+\begin{adjustwidth}{0.14cm}{0cm}
+\begin{minipage}[l]{0.5\linewidth}
+\justifying
+\normalsize{Critical perimeter at $d/2$ from column face:}
+\[
+b_0 = 2[(a + d) + (b + d)]
+     = 2[(0.3 + 0.692) + (0.6 + 0.692)]
+     = 4.57 \ \text{m}
+\]
+Punching shear force:
+\[
+V_u = p_u [XY - (a+d)(b+d)]
+\]
+\[
+V_u = 195.06 [1.8 \times 3.6 - 0.992 \times 1.292]
+     = 1015.2 \ \text{kN}
+\]
+Punching shear stress:
+\[
+\tau_v = \frac{V_u}{b_0 \, d}
+       = \frac{1015.2}{4.57 \times 0.692}
+       = 0.32 \ \text{N/mm}^2
+\]
+Permissible punching shear stress:
+\[
+\tau_c = 0.25 \sqrt{f_{ck}}
+       = 1.12 \ \text{N/mm}^2
+\]
+\textbf{Since } $\tau_v \le \tau_c$,
+\vspace{2mm}
+\colorbox{okgreen}{\textbf{SAFE}}
+\normalsize
+\end{minipage}
+\hfill
+\begin{minipage}[c]{0.45\linewidth}
+\centering
+\includegraphics[width=0.68\linewidth]{twoway.png}
+\captionof{figure}{Punching shear critical perimeter}
+\end{minipage}
+
+\end{adjustwidth}
+\begin{tcolorbox}[width=\textwidth,top=1pt, bottom=1pt, colframe=staco-red, colback=staco-red, arc=0.5mm]
+        \color{white}\hspace{0.14cm}{\large \textbf{Moment Check according to IS 456: 2000}}
+        \end{tcolorbox}
+
+\begin{adjustwidth}{5mm}{0mm}
+Moment of Resistance:
+assuming ($Xumax / d) = 0.48$ 
+\[
+M_r = 0.138 \, f_{ck} \, b \, d^2
+\]
+\[
+M_r = 0.138 \times 20 \times 1800 \times 692^2 \times 10^{-6}
+     = 475 \ \text{kN·m}
+\]
+Applied moment:
+\[
+M_u = 240 \ \text{kN·m}
+\]
+\textbf{Since } $M_u \le M_r$,
+\vspace{2mm}
+\colorbox{okgreen}{\textbf{SAFE}}
+\normalsize
+\end{adjustwidth}
+ \centering
+    \includegraphics[width=0.85\linewidth]{moment.png}
+    \captionof{figure}{Moment generation}
+    \label{fig:placeholder}
+
+
+\begin{tcolorbox}[width=\textwidth,top=1pt, bottom=1pt, colframe=staco-red, colback=staco-red, arc=0.5mm]
+        \color{white}\hspace{0.14cm}{\large \textbf{Reinforcement Detailing and Spacing Calculation according to IS 456: 2000}}
+        \end{tcolorbox}
+
+\begin{adjustwidth}{0.14cm}{0cm}
+\justifying
+\fontsize{9}{11}\selectfont
+
+\textbf{Required steel area (IS 456:2000, Cl. 26.5.2)}
+
+\vspace{2mm}
+
+\textbf{Required reinforcement from bending moment:}
+
+\[
+A_{st,req} = \frac{M_u}{0.87 f_y \, j \, d}
+           = \frac{240 \times 10^6}
+           {0.87 \times 415 \times 0.9 \times 692}
+           = 1045 \ \text{mm}^2
+\]
+
+\textbf{Minimum reinforcement as per IS 456:2000:}
+
+\[
+A_{st,min} = 0.12\% \times b \times D
+           = 0.0012 \times 1800 \times 692
+           = 1494 \ \text{mm}^2
+\]
+
+\textbf{Governing reinforcement:}
+
+\[
+A_{st,prov} = \max(A_{st,req}, A_{st,min})
+            = 1494 \ \text{mm}^2
+\]
+
+\textbf{Since } $A_{st,prov} \ge A_{st,min}$,
+\quad
+\colorbox{okgreen}{\textbf{SAFE}}
+
+\vspace{2mm}
+
+\textbf{Assumed reinforcement:} $\phi 16$ mm bars
+
+\textbf{Area of one bar:}
+
+\[
+A_{bar} = \frac{\pi}{4} \times 16^2
+        = 201 \ \text{mm}^2
+\]
+
+\textbf{Spacing of reinforcement bars:}
+
+\[
+s = \frac{1800 \times A_{bar}}{A_{st,prov}}
+  = \frac{1800 \times 201}{1494}
+  = 242.16 \ \text{mm}
+\]
+
+\textbf{Provide:}
+\quad
+$\phi 16$ mm bars @ 240 mm c/c (both directions)
+
+\vspace{1mm}
+\colorbox{okgreen}{\textbf{REINFORCEMENT ADEQUATE}}
+\vspace{1cm}
+
+\includegraphics[width=0.5\linewidth]{bar.png}
+\captionof{figure}{Reinforcement detailing}
+\label{figure:placeholder}
+
+\end{adjustwidth}
+
+\clearpage
+
+\begin{tcolorbox}[width=\textwidth,top=1pt, bottom=1pt, colframe=staco-red, colback=staco-red, arc=0.5mm]
+        \color{white}\hspace{0.14cm}{\large \textbf{Development Check according to IS 456: 2000}}
+        \end{tcolorbox}
+\begin{adjustwidth}{5mm}{0mm}
+\textbf{Development Length Check}\, according to IS 456:2000, Cl. 26.2.1
+\normalsize
+
+\[
+L_d = \frac{0.87 f_y \phi}{4 \tau_{bd}}
+\]
+
+where $\tau_{bd}$ = Bond stress
+\vspace{1cm}
+
+For Fe 415:
+
+\[
+L_d = 47 \phi = 47 \times 16 = 752 \ \text{mm}
+\]
+
+Available length:
+
+\[
+L_{avail} = \frac{X - a}{2}
+          = \frac{1.8 - 0.3}{2}
+          = 750 \ \text{mm}
+\]
+
+\textbf{Since } $L_{avail} \le L_d$,
+
+
+
+\vspace{2mm}
+\colorbox{badred}{\textbf{DEVELOPMENT LENGTH NOT ADEQUATE}}\,
+\textbf{Revise footing or Provide hooks}
+
+\normalsize
+\end{adjustwidth}
+\vspace{1cm}
+
+\large
+\textbf{\underline{Design Summary:}}
+\vspace{0.5cm}
+\begin{adjustwidth}{5mm}{0mm}
+\begin{itemize}
+\large
+  \item Footing size: $1.8 \times 3.6$ m
+  \item Effective depth: 692 mm
+  \item Bearing pressure: SAFE
+  \item One-way shear: SAFE
+  \item Punching shear: SAFE
+  \item Bending moment: SAFE
+  \item Reinforcement: 16 mm @ 240 mm c/c
+\end{itemize}
+\end{adjustwidth}
+
+        
+\end{document}
